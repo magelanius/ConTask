@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        @*<a href="javascript:void(0)" class="closebtn">&times;</a>*@
+        <a href="#">Inbox</a>
+        <a href="#">My tasks</a>
+        <a href="#">Boards</a>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+    @*<span onclick="openNav()">open</span>*@
+    @*https://www.w3schools.com/howto/howto_js_sidenav.asp*@
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <div id="main">
+
+    </div>
+
+</body>
+</html>

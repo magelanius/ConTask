@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,10 @@ namespace ConTask.Models
 {
     public class Project
     {
+        [Key]
+        [Column(Order = 0)]
         public string Id { get; set; }
         public string BoardId { get; set; }
-        public string UserId { get; set; }
         public string Description { get; set; }
 
         public DateTime? StartedAt { get; set; }
