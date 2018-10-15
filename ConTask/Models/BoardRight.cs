@@ -15,7 +15,7 @@ namespace ConTask.Models
         public string BoardId { get; set; }
         public string MemberId { get; set; }
         
-        private enum Rights { Owner, Member, ProjectManager }
+        public enum Rights { Owner, Member, ProjectManager }
 
         [EnumDataType(typeof(Rights))]
         private Rights Status { get; set; }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@*@model IEnumerable<ConTask.Models.Board>*@
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,11 +11,32 @@
 
 </head>
 <body>
+
+
     <div id="mySidenav" class="sidenav">
         @*<a href="javascript:void(0)" class="closebtn">&times;</a>*@
-        <a href="#">Inbox</a>
-        <a href="#">My tasks</a>
-        <a href="#">Boards</a>
+        <div class="form-group" href="#">Inbox</div>
+        <div class="form-group" href="#">My tasks</div>
+        <div class="dropdown form-group">
+            <span>Boards</span>
+            <div class="dropdown-content form-group">
+                @Html.ActionLink("New board", "New", "Board")
+                @*<a href="#">New Board</a>*@
+                @*@if (Model.Any())
+        {
+            foreach (var board in Model)
+            {
+                <div>
+                    <div>@Html.ActionLink(board.Name, "Details", "Customers", new { id = board.Id }, null)</div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Board list is empty</p>
+        }*@
+            </div>
+        </div>
     </div>
 
     <!-- Use any element to open the sidenav -->

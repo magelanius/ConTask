@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201810151113541_Initial.Designer.cs">
       <DependentUpon>201810151113541_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810151804155_Initial2.cs" />
+    <Compile Include="Migrations\201810151804155_Initial2.Designer.cs">
+      <DependentUpon>201810151804155_Initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Board.cs" />
@@ -216,6 +220,7 @@
     <Compile Include="Models\Member.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BoardFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
@@ -283,6 +288,7 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Board\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810151113541_Initial.resx">
       <DependentUpon>201810151113541_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810151804155_Initial2.resx">
+      <DependentUpon>201810151804155_Initial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
