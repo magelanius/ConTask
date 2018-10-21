@@ -17,7 +17,7 @@ namespace ConTask.Models
         [EnumDataType(typeof(Types))]
         private Types Type { get; set; }
 
-        public int StatusId
+        public int TypeId
         {
             get
             {

@@ -18,10 +18,13 @@ namespace ConTask.Controllers
 
         private ApplicationDbContext _context;
         protected UserManager<ApplicationUser> UserManager { get; set; }
+        private Board CurrentBoard { get; set; }
+        MainTableViewModel viewModel;
 
         public BoardController()
         {
             _context = new ApplicationDbContext();
+            viewModel = LoadTableViewModel();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this._context));
         }
 
@@ -38,19 +41,54 @@ namespace ConTask.Controllers
         public ActionResult Test()
         {
             var viewModel = _context.Boards.ToList();
-            TableHeaderCell site = new TableHeaderCell();
+
 
             return View("../Board/Index", viewModel);
         }
 
-       
-
         // GET: Board
         public ActionResult Index()
         {
-            return View();
+            return View("Index", viewModel);
+        }
+        // builder??
+        // then pass it to NGon so you have an access to data from js. Js can easily build the table
+        //then create the same for saving and dont forget about validation etc
+        public MainTableViewModel LoadTableViewModel()
+        {
+            MainTableViewModel viewModel = new MainTableViewModel();
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            var boardsOfUser = _context.BoardRights.
+                Where(x => x.UserId == user.Id).
+                Select(x => x.BoardId);
+
+            foreach (var item in boardsOfUser)
+            {
+                viewModel.Boards.Add(_context.Boards.FirstOrDefault(x => x.Id == item));
+            }
+            CurrentBoard = viewModel.Boards[0];
+            viewModel.Projects = _context.Projects.Where(x => x.BoardId == CurrentBoard.Id).ToList();
+
+            viewModel.BoardColumns = _context.BoardColumns.Where(x => x.BoardId == CurrentBoard.Id).ToList();
+
+            foreach (var item in viewModel.Projects)
+            {
+                viewModel.ProjectTasks.AddRange(_context.ProjectTasks.
+                    Where(x => x.ProjectId == item.Id).
+                    ToList());
+            }
+
+            foreach (var task in viewModel.ProjectTasks)
+            {
+                viewModel.BoardRows.AddRange(_context.BoardRows.
+                    Where(x => x.TaskId == task.Id).ToList());
+            }
+
+            return viewModel;
         }
 
+        //public ActionResult BoardSelected
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = RoleName.CanManageMovies)]
@@ -59,17 +97,17 @@ namespace ConTask.Controllers
             //if (!ModelState.IsValid)
             //{
             //    var viewModel = new BoardFormViewModel(board);
-                
+
             //    return View("MovieForm", viewModel);
             //}
 
             if (board.Id == 0)
             {
-                
-                
+
+
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 var right = new BoardRight();
-                
+
                 right.UserId = user.Id;
                 right.BoardId = board.Id;
                 right.StatusId = 0;

@@ -11,7 +11,6 @@ namespace ConTask.Controllers
     {
         public ActionResult Index()
         {
-            
             return View();
         }
 
