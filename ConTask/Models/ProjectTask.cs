@@ -11,9 +11,9 @@ namespace ConTask.Models
     {
         [Key]
         [Column(Order = 0)]
-        public string Id { get; set; }
-        public string ProjectId { get; set; }
-        public string MemberId { get; set; }
+        public int Id { get; set; }
+        public int ProjectId { get; set; }
+        public int UserId { get; set; }
         public string Description { get; set; }
 
         public DateTime? PlannedStartAt { get; set; }

@@ -11,9 +11,9 @@ namespace ConTask.Models
     {
         [Key]
         [Column(Order = 0)]
-        public string Id { get; set; }
-        public string BoardId { get; set; }
-        public string MemberId { get; set; }
+        public int Id { get; set; }
+        public int BoardId { get; set; }
+        public string UserId { get; set; }
         
         public enum Rights { Owner, Member, ProjectManager }
 

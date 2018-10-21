@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<ConTask.Models.Board>*@
+﻿@model IEnumerable<ConTask.Models.Board>
 
 <!DOCTYPE html>
 <html>
@@ -21,20 +21,23 @@
             <span>Boards</span>
             <div class="dropdown-content form-group">
                 @Html.ActionLink("New board", "New", "Board")
-                @*<a href="#">New Board</a>*@
-                @*@if (Model.Any())
-        {
-            foreach (var board in Model)
-            {
-                <div>
-                    <div>@Html.ActionLink(board.Name, "Details", "Customers", new { id = board.Id }, null)</div>
-                </div>
-            }
-        }
-        else
-        {
-            <p>Board list is empty</p>
-        }*@
+
+                @if (Model.Any())
+                    {
+                        foreach (var board in Model)
+                        {
+                
+                    <div>
+                        <div>@board.Name</div>
+                        @* <div>@Html.ActionLink(board.Name, "Details", "Customers", new { id = board.Id }, null)</div>*@
+                    </div>
+                
+                }
+                    }
+                    else
+                    {
+                        <p>Board list is empty</p>
+                    }
             </div>
         </div>
     </div>

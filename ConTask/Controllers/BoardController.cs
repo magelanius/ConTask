@@ -4,9 +4,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace ConTask.Controllers
 {
@@ -32,8 +35,31 @@ namespace ConTask.Controllers
             var viewModel = new BoardFormViewModel();
             return View("New", viewModel);
         }
+        public ActionResult Test()
+        {
+            var viewModel = _context.Boards.ToList();
+            TableHeaderCell site = new TableHeaderCell();
 
+            return View("../Board/Index", viewModel);
+        }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!((Page)System.Web.HttpContext.Current.CurrentHandler).IsPostBack)
+            {
+
+                DataTable dt = new DataTable();
+                dt.Columns.AddRange(new DataColumn[3] { new DataColumn("Id", typeof(int)),
+                            new DataColumn("Name", typeof(string)),
+                            new DataColumn("Country",typeof(string)) });
+                dt.Rows.Add(1, "John Hammond", "United States");
+                dt.Rows.Add(2, "Mudassar Khan", "India");
+                dt.Rows.Add(3, "Suzanne Mathews", "France");
+                dt.Rows.Add(4, "Robert Schidner", "Russia");
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+        }
 
         // GET: Board
         public ActionResult Index()
