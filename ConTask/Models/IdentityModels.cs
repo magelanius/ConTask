@@ -23,12 +23,13 @@ namespace ConTask.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public DbSet<Board> Boards { get; set; }
+        public DbSet<BoardColumn> BoardColumns { get; set; }
+        public DbSet<BoardRow> BoardRows { get; set; }
         public DbSet<BoardRight> BoardRights { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }
-        public DbSet<Member> Members { get; set; }
+        
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

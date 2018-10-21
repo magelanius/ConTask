@@ -3,41 +3,31 @@ namespace ConTask.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    public partial class Initial : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
+
             CreateTable(
                 "dbo.BoardRights",
                 c => new
                 {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    BoardId = c.String(nullable: false, maxLength: 128),
-                    MemberId = c.String(nullable: false, maxLength: 128),
+                    Id = c.Int(nullable: false, identity: true),
+                    BoardId = c.Int(nullable: false),
+                    UserId = c.String(nullable: false, maxLength: 128),
                     StatusId = c.Int(nullable: false),
                 })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Boards", t => t.BoardId, cascadeDelete: true)
-                .ForeignKey("dbo.Members", t => t.MemberId, cascadeDelete: true);
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true);
 
             CreateTable(
                 "dbo.Boards",
                 c => new
                 {
-                    Id = c.String(nullable: false, maxLength: 128),
+                    Id = c.Int(nullable: false, identity: true),
                     Name = c.String(),
                     Description = c.String(),
-                })
-                .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.Members",
-                c => new
-                {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    FirstName = c.String(),
-                    LastName = c.String(),
-                    BirthDate = c.DateTime(nullable: false),
                 })
                 .PrimaryKey(t => t.Id);
 
@@ -45,8 +35,8 @@ namespace ConTask.Migrations
                 "dbo.Projects",
                 c => new
                 {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    BoardId = c.String(nullable: false, maxLength: 128),
+                    Id = c.Int(nullable: false, identity: true),
+                    BoardId = c.Int(nullable: false),
                     Description = c.String(),
                     StartedAt = c.DateTime(),
                     DeadLine = c.DateTime(),
@@ -60,9 +50,9 @@ namespace ConTask.Migrations
                 "dbo.ProjectTasks",
                 c => new
                 {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    ProjectId = c.String(nullable: false, maxLength: 128),
-                    MemberId = c.String(nullable: false, maxLength: 128),
+                    Id = c.Int(nullable: false, identity: true),
+                    ProjectId = c.Int(nullable: false),
+                    UserId = c.String(nullable: false, maxLength: 128),
                     Description = c.String(),
                     PlannedStartAt = c.DateTime(),
                     ActualyStartedAt = c.DateTime(),
@@ -70,9 +60,8 @@ namespace ConTask.Migrations
                     StatusId = c.Int(nullable: false),
                 })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: false)
-                .ForeignKey("dbo.Members", t => t.MemberId, cascadeDelete: false);
-
+                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false);
 
             CreateTable(
                 "dbo.AspNetRoles",
@@ -163,9 +152,9 @@ namespace ConTask.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ProjectTasks");
             DropTable("dbo.Projects");
-            DropTable("dbo.Members");
             DropTable("dbo.Boards");
             DropTable("dbo.BoardRights");
+            DropTable("dbo.BoardFormViewModels");
         }
     }
 }

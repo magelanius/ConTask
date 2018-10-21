@@ -7,13 +7,13 @@ namespace ConTask.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class TableElements : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TableElements));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810151113541_Initial"; }
+            get { return "201810211217490_TableElements"; }
         }
         
         string IMigrationMetadata.Source

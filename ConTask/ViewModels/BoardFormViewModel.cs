@@ -9,7 +9,7 @@ namespace ConTask.ViewModels
     public class BoardFormViewModel
     {
         
-        public string Id { get; set; }
+        public int Id { get; set; }
         
         public string Name { get; set; }
         
@@ -17,7 +17,7 @@ namespace ConTask.ViewModels
 
         public BoardFormViewModel()
         {
-            Id = "";
+            Id = 0;
             //Guid.NewGuid().ToString()
         }
 

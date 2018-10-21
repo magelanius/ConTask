@@ -43,23 +43,7 @@ namespace ConTask.Controllers
             return View("../Board/Index", viewModel);
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!((Page)System.Web.HttpContext.Current.CurrentHandler).IsPostBack)
-            {
-
-                DataTable dt = new DataTable();
-                dt.Columns.AddRange(new DataColumn[3] { new DataColumn("Id", typeof(int)),
-                            new DataColumn("Name", typeof(string)),
-                            new DataColumn("Country",typeof(string)) });
-                dt.Rows.Add(1, "John Hammond", "United States");
-                dt.Rows.Add(2, "Mudassar Khan", "India");
-                dt.Rows.Add(3, "Suzanne Mathews", "France");
-                dt.Rows.Add(4, "Robert Schidner", "Russia");
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
-            }
-        }
+       
 
         // GET: Board
         public ActionResult Index()
@@ -79,14 +63,14 @@ namespace ConTask.Controllers
             //    return View("MovieForm", viewModel);
             //}
 
-            if (board.Id == "" || board.Id == null)
+            if (board.Id == 0)
             {
-                board.Id = Guid.NewGuid().ToString();
+                
                 
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 var right = new BoardRight();
-                right.Id = Guid.NewGuid().ToString();
-                right.MemberId = user.Id;
+                
+                right.UserId = user.Id;
                 right.BoardId = board.Id;
                 right.StatusId = 0;
 
